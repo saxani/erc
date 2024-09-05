@@ -1,2 +1,2 @@
-export { bulkUploadProducts } from './bulk-upload-products.js';
-export { bulkAddCategories } from './bulk-add-categories.js';
+export { bulkUploadProducts } from './bulk-upload-products';
+export { bulkAddCategories } from './bulk-add-categories';
