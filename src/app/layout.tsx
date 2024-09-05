@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
+import graphik from './fonts/fontLoader';
 import { Inter } from 'next/font/google';
 import './globals.css';
+
+import Providers from '@/app/providers';
+import Header from '@/components/header';
+import Menu from '@/components/menu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={`${graphik.variable} font-sans`}>
+        <Providers>
+          <Header />
+          <Menu />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

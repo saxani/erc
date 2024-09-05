@@ -1,0 +1,62 @@
+model Product {
+  id                    String    @id @default(cuid())
+  oldRef                String?   @unique
+  sku                   String?
+  slug                  String
+  type                  String
+  hasVariants           Boolean?
+  optionType            String?
+  optionValue           String?
+  name                  String
+  description           String
+  stockLevel            Int?
+  lowStockLevel         Int?
+  trackInventory        String
+  inventoried           Boolean?
+  visible               Boolean
+  allowOrders           Boolean?
+  availability          String?
+  maximumOrderQuantity  Int?
+  width                 Float?
+  height                Float?
+  depth                 Float?
+  flippablePDF          String?
+  images                ProductImage[]
+  categories            CategoriesForProducts[]
+  files                 ProductFile[]
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model ProductImage {
+  id                    String @id @default(cuid())
+  filename              String @unique
+  description           String?
+  thumbnail             Boolean
+  index                 Int
+  productId             String
+  product               Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ProductFile {
+  id                    String @id @default(cuid()) 
+  filename              String @unique
+  description           String?
+  productId             String
+  product               Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id        String @id @default(cuid())
+  path      String @unique
+  products  CategoriesForProducts[]
+}
+
+model CategoriesForProducts {
+  postproduct       Product     @relation(fields: [productId], references: [id])
+  productId         String
+  category          Category @relation(fields: [categoryId], references: [id])
+  categoryId        String 
+
+  @@id([productId, categoryId])
+}
