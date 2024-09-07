@@ -8,7 +8,7 @@ const MenuItem = ({ data }: any) => {
   const hasChildren = data.children.length > 0 ? true : false;
 
   return (
-    <li>
+    <li style={{ margin: '15px' }}>
       {hasChildren ? (
         <span onClick={() => setShow(!show)} className='cursor-pointer'>
           {data.name}
@@ -23,7 +23,7 @@ const MenuItem = ({ data }: any) => {
 
 export default function MenuSection({ data }: any) {
   return (
-    <ul style={{ marginLeft: '25px' }}>
+    <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
       {data.children.map((el: any) => (
         <MenuItem data={el} key={el.id} />
       ))}
