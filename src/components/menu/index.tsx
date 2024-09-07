@@ -1,17 +1,12 @@
 'use server';
 
 import { fetchCategories } from '@/db/queries/categories';
-import formatMenu from '@/utils/formatMenu';
+import formatMenu from '@/utils/formatMenu.js';
+import MenuSection from './menuSection';
 
 export default async function Menu() {
   const categories = await fetchCategories();
-  const formattedMenuData = await formatMenu(categories);
+  const formattedMenuData: any = await formatMenu(categories);
 
-  return (
-    <ul>
-      {formattedMenuData.map((el) => (
-        <li key={el.id}>{el.name}</li>
-      ))}
-    </ul>
-  );
+  return <MenuSection data={formattedMenuData} />;
 }
